@@ -21,6 +21,6 @@ public class Customer {
     }
 
     public String getInfo() {
-        return cus_id + " - " + fname + " " + lname + " (" + gender + ")";
+        return cus_id + " " + fname + " " + lname + " " + gender + " " + birthdate + " " + address + " " + phone;
     }
 }

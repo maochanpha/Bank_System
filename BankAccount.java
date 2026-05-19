@@ -2,24 +2,26 @@ import java.time.LocalDate;
 import java.util.Vector;
 
 public class BankAccount {
-    private String accountNum;
-    private double basicBalance;
+
+    private String accountnum;
+
+    private double basicbalance;
     private double balance;
 
     private Customer cus;
-    private Vector<History> accHistory;
 
-    // Constructor 1
+    private Vector<History> acchistory = new Vector<>();
+
     public BankAccount() {
-        accHistory = new Vector<>();
     }
 
-    // Constructor 2
-    public BankAccount(String accountNum, double basicBalance) {
-        this.accountNum = accountNum;
-        this.basicBalance = basicBalance;
-        this.balance = basicBalance;
-        accHistory = new Vector<>();
+    public BankAccount(
+            String accountnum,
+            double basicbalance) {
+
+        this.accountnum = accountnum;
+        this.basicbalance = basicbalance;
+        this.balance = basicbalance;
     }
 
     public void setCustomer(Customer cus) {
@@ -27,47 +29,75 @@ public class BankAccount {
     }
 
     public void deposit(double amount) {
+
         balance += amount;
-        accHistory.add(new History(LocalDate.now(), "Deposit", amount));
+
+        acchistory.add(
+                new History(
+                        LocalDate.now(),
+                        "Deposit",
+                        amount));
     }
 
     public void withdrawal(double amount) {
+
         if (amount <= balance) {
+
             balance -= amount;
-            accHistory.add(new History(LocalDate.now(), "Withdraw", amount));
-        } else {
-            System.out.println("❌ Not enough balance!");
+
+            acchistory.add(
+                    new History(
+                            LocalDate.now(),
+                            "Withdraw",
+                            amount));
         }
     }
 
     public void interest(double amount) {
+
         balance += amount;
-        accHistory.add(new History(LocalDate.now(), "Interest", amount));
+
+        acchistory.add(
+                new History(
+                        LocalDate.now(),
+                        "Interest",
+                        amount));
     }
 
     public String getAccountNumber() {
-        return accountNum;
+        return accountnum;
     }
 
     public double getBasicBalance() {
-        return basicBalance;
+        return basicbalance;
     }
 
     public double getBalance() {
         return balance;
     }
 
-    public void showHistory() {
-        System.out.println("\n=== Transaction History ===");
-        for (History h : accHistory) {
-            System.out.println(h.getInfo());
+    public void showInfo() {
+
+        System.out.println(
+                "Account: "
+                        + accountnum);
+
+        System.out.println(
+                "Balance: "
+                        + balance);
+
+        System.out.println(
+                "Customer: "
+                        + cus.getInfo());
+
+        System.out.println(
+                "\nHistory");
+
+        for (History h : acchistory) {
+
+            System.out.println(
+                    h.getInfo());
         }
     }
 
-    public void showAccountInfo() {
-        System.out.println("\n=== Account Info ===");
-        System.out.println("Account: " + accountNum);
-        System.out.println("Customer: " + cus.getInfo());
-        System.out.println("Balance: $" + balance);
-    }
 }

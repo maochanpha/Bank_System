@@ -2,95 +2,119 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+    public static void main(
+            String[] args) {
 
-        // ===== INPUT CUSTOMER =====
-        System.out.print("Enter Customer ID: ");
-        String id = sc.nextLine();
+        Scanner input =
+                new Scanner(System.in);
 
-        System.out.print("Enter First Name: ");
-        String fname = sc.nextLine();
+        System.out.print(
+                "Customer ID: ");
 
-        System.out.print("Enter Last Name: ");
-        String lname = sc.nextLine();
+        String cusId =
+                input.nextLine();
 
-        System.out.print("Enter Gender: ");
-        String gender = sc.nextLine();
+        System.out.print(
+                "First Name: ");
 
-        System.out.print("Enter Birthdate (yyyy-mm-dd): ");
-        String dateInput = sc.nextLine();
-        LocalDate birthdate = LocalDate.parse(dateInput);
+        String fname =
+                input.nextLine();
 
-        System.out.print("Enter Address: ");
-        String address = sc.nextLine();
+        System.out.print(
+                "Last Name: ");
 
-        System.out.print("Enter Phone: ");
-        String phone = sc.nextLine();
+        String lname =
+                input.nextLine();
 
-        Customer c = new Customer(id, fname, lname, gender, birthdate, address, phone);
+        System.out.print(
+                "Gender: ");
 
-        // ===== INPUT ACCOUNT =====
-        System.out.print("\nEnter Account Number: ");
-        String accNum = sc.nextLine();
+        String gender =
+                input.nextLine();
 
-        System.out.print("Enter Initial Balance: ");
-        double basicBalance = sc.nextDouble();
+        System.out.print(
+                "Address: ");
 
-        BankAccount acc = new BankAccount(accNum, basicBalance);
-        acc.setCustomer(c);
+        String address =
+                input.nextLine();
 
-        int choice;
+        System.out.print(
+                "Phone: ");
 
-        do {
-            System.out.println("\n===== MENU =====");
-            System.out.println("1. Deposit");
-            System.out.println("2. Withdraw");
-            System.out.println("3. Add Interest");
-            System.out.println("4. Show Account Info");
-            System.out.println("5. Show History");
-            System.out.println("0. Exit");
-            System.out.print("Choose: ");
-            choice = sc.nextInt();
+        String phone =
+                input.nextLine();
 
-            switch (choice) {
-                case 1:
-                    System.out.print("Enter deposit amount: ");
-                    double dep = sc.nextDouble();
-                    acc.deposit(dep);
-                    break;
+        Customer customer =
+                new Customer(
+                        cusId,
+                        fname,
+                        lname,
+                        gender,
+                        LocalDate.now(),
+                        address,
+                        phone);
 
-                case 2:
-                    System.out.print("Enter withdraw amount: ");
-                    double wit = sc.nextDouble();
-                    acc.withdrawal(wit);
-                    break;
+        System.out.println(
+                "\nCURRENT SAVING");
 
-                case 3:
-                    System.out.print("Enter interest amount: ");
-                    double in = sc.nextDouble();
-                    acc.interest(in);
-                    break;
+        System.out.print(
+                "Account Number: ");
 
-                case 4:
-                    acc.showAccountInfo();
-                    break;
+        String csAcc =
+                input.nextLine();
 
-                case 5:
-                    acc.showHistory();
-                    break;
+        System.out.print(
+                "Amount: ");
 
-                case 0:
-                    System.out.println("Exit program...");
-                    break;
+        double amount =
+                input.nextDouble();
 
-                default:
-                    System.out.println("Invalid choice!");
-            }
+        System.out.print(
+                "YIR: ");
 
-        } while (choice != 0);
+        double yir =
+                input.nextDouble();
 
-        sc.close();
+        CurrentedSaving cs =
+                new CurrentedSaving(
+                        csAcc,
+                        LocalDate.now(),
+                        yir,
+                        amount);
+
+        cs.setCustomer(
+                customer);
+
+        System.out.print(
+                "Deposit: ");
+
+        double dep =
+                input.nextDouble();
+
+        cs.deposit(dep);
+
+        System.out.print(
+                "Withdraw: ");
+
+        double wd =
+                input.nextDouble();
+
+        cs.withdrawal(wd);
+
+        System.out.print(
+                "Interest: ");
+
+        double in =
+                input.nextDouble();
+
+        cs.interest(in);
+
+        System.out.println(
+                "\nRESULT");
+
+        cs.showInfo();
+
     }
+
 }
